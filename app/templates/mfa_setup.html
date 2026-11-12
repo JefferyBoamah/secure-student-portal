@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Set up MFA{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h1>Set up two-factor authentication</h1>
+  <p>Open an authenticator app (Google Authenticator, Microsoft Authenticator, Authy) and add an account manually with this key:</p>
+  <p class="secret">{{ secret }}</p>
+  <p class="hint">Time-based, 6 digits, 30 seconds. Advanced: <code>{{ uri }}</code></p>
+  <form method="post" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>6-digit code <input name="code" required inputmode="numeric" pattern="[0-9 ]{6,7}" maxlength="7" autofocus></label>
+    <button type="submit">Confirm and finish</button>
+  </form>
+</section>
+{% endblock %}

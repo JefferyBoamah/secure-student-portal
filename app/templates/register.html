@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h1>Create a student account</h1>
+  {% if errors %}<ul class="flash error">{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>{% endif %}
+  <form method="post" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Full name <input name="full_name" required maxlength="80" value="{{ form.get('full_name', '') }}"></label>
+    <label>Username <input name="username" required maxlength="30" value="{{ form.get('username', '') }}"></label>
+    <label>Email <input type="email" name="email" required maxlength="190" value="{{ form.get('email', '') }}"></label>
+    <label>Phone (optional, stored encrypted) <input name="phone" maxlength="16" value="{{ form.get('phone', '') }}"></label>
+    <label>Password <input type="password" name="password" required maxlength="128" autocomplete="new-password"></label>
+    <label>Repeat password <input type="password" name="password2" required maxlength="128" autocomplete="new-password"></label>
+    <p class="hint">At least 12 characters with upper and lower case, a digit and a symbol. No common words.</p>
+    <button type="submit">Register</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Result{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h1>{{ r['code'] }}: {{ r['title'] }}</h1>
+  <dl><dt>Score</dt><dd>{{ r['score'] }}</dd><dt>Grade</dt><dd>{{ r['grade'] }}</dd>
+      <dt>Released</dt><dd>{{ r['updated_at'] | when }}</dd></dl>
+  <p><a href="{{ url_for('portal.results') }}">Back to results</a></p>
+</section>
+{% endblock %}

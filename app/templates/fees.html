@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Fees{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Fees</h1>
+  <dl><dt>Amount due</dt><dd>{{ due | money }}</dd><dt>Paid</dt><dd>{{ paid | money }}</dd>
+      <dt>Outstanding</dt><dd>{{ outstanding | money }}</dd></dl>
+  {% if outstanding > 0 %}
+  <form method="post" class="row">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Amount to pay (GHS) <input name="amount" required inputmode="decimal" maxlength="12"></label>
+    <button type="submit">Start payment</button>
+  </form>
+  {% endif %}
+  <h2>Payments</h2>
+  {% if payments %}
+  <table>
+    <thead><tr><th>Reference</th><th>Amount</th><th>Status</th><th>Created</th></tr></thead>
+    <tbody>{% for p in payments %}
+      <tr><td>{{ p['reference'] }}</td><td>{{ p['amount_cents'] | money }}</td><td>{{ p['status'] }}</td><td>{{ p['created_at'] | when }}</td></tr>
+    {% endfor %}</tbody>
+  </table>
+  {% else %}<p>No payments yet.</p>{% endif %}
+</section>
+{% endblock %}

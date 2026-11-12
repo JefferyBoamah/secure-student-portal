@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Verify code{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h1>Enter your code</h1>
+  <form method="post" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>6-digit code <input name="code" required inputmode="numeric" pattern="[0-9 ]{6,7}" maxlength="7" autofocus></label>
+    <button type="submit">Verify</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Grades{% endblock %}
+{% block content %}
+{% if can('grades:propose') %}
+<section class="card">
+  <h1>Propose a grade</h1>
+  <p class="hint">Grades stay hidden from students until the registry approves them (maker-checker).</p>
+  <form method="post" class="row">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <label>Student
+      <select name="student_id" required>{% for s in students %}<option value="{{ s['id'] }}">{{ s['username'] }} ({{ s['full_name'] }})</option>{% endfor %}</select></label>
+    <label>Course
+      <select name="course_id" required>{% for c in courses %}<option value="{{ c['id'] }}">{{ c['code'] }}</option>{% endfor %}</select></label>
+    <label>Score (0-100) <input name="score" type="number" min="0" max="100" required></label>
+    <button type="submit">Submit for approval</button>
+  </form>
+</section>
+{% endif %}
+<section class="card">
+  <h1>All grades</h1>
+  <table>
+    <thead><tr><th>Student</th><th>Course</th><th>Score</th><th>Grade</th><th>Status</th><th>Entered by</th><th>Approved by</th><th></th></tr></thead>
+    <tbody>{% for r in rows %}
+      <tr><td>{{ r['username'] }}</td><td>{{ r['code'] }}</td><td>{{ r['score'] }}</td><td>{{ r['grade'] }}</td>
+          <td>{{ r['status'] }}</td><td>{{ r['entered_by'] }}</td><td>{{ r['approved_by'] or '-' }}</td>
+          <td>{% if r['status'] == 'pending' and can('grades:approve') %}
+            <form method="post" action="{{ url_for('staff.approve', result_id=r['id']) }}" class="inline">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button type="submit">Approve</button></form>{% endif %}</td></tr>
+    {% endfor %}</tbody>
+  </table>
+</section>
+{% endblock %}

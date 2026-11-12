@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}My results{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>My results</h1>
+  {% if rows %}
+  <table>
+    <thead><tr><th>Course</th><th>Title</th><th>Score</th><th>Grade</th><th></th></tr></thead>
+    <tbody>
+    {% for r in rows %}
+      <tr><td>{{ r['code'] }}</td><td>{{ r['title'] }}</td><td>{{ r['score'] }}</td><td>{{ r['grade'] }}</td>
+          <td><a href="{{ url_for('portal.result_detail', result_id=r['id']) }}">Details</a></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<p>No approved results yet.</p>{% endif %}
+</section>
+{% endblock %}

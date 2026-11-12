@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Audit log{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Security audit log</h1>
+  {% if ok %}<p class="flash ok">Hash chain verified: {{ checked }} entries, no tampering detected.</p>
+  {% else %}<p class="flash error">TAMPERING DETECTED at entry {{ bad_id }}. Investigate immediately.</p>{% endif %}
+  <table>
+    <thead><tr><th>#</th><th>Time (UTC)</th><th>Event</th><th>User</th><th>IP</th><th>Detail</th></tr></thead>
+    <tbody>{% for r in rows %}
+      <tr><td>{{ r['id'] }}</td><td>{{ r['ts'] | when }}</td><td>{{ r['event'] }}</td>
+          <td>{{ r['username'] or '-' }}</td><td>{{ r['ip'] }}</td><td>{{ r['detail'] }}</td></tr>
+    {% endfor %}</tbody>
+  </table>
+</section>
+{% endblock %}
