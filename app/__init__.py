@@ -29,6 +29,15 @@ def create_app(test_config=None) -> Flask:
             if not app.config.get(key):
                 app.config[key] = value
 
+    if os.environ.get("PORTAL_ASSUME_HTTPS") == "1":
+        # Hosts such as PythonAnywhere terminate TLS in front of the app and only serve HTTPS.
+        inner = app.wsgi_app
+
+        def _assume_https(environ, start_response):
+            environ["wsgi.url_scheme"] = "https"
+            return inner(environ, start_response)
+        app.wsgi_app = _assume_https
+
     if app.config["BEHIND_PROXY"]:
         # Behind Nginx: trust exactly one proxy hop for client IP, scheme and host.
         app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
