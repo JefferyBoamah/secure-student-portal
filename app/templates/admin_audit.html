@@ -8,7 +8,7 @@
   <table>
     <thead><tr><th>#</th><th>Time (UTC)</th><th>Event</th><th>User</th><th>IP</th><th>Detail</th></tr></thead>
     <tbody>{% for r in rows %}
-      <tr><td>{{ r['id'] }}</td><td>{{ r['ts'] | when }}</td><td>{{ r['event'] }}</td>
+      <tr><td>{{ r['id'] }}</td><td>{{ r['ts'] | when }}</td><td><span class="badge {% if 'fail' in r['event'] or 'block' in r['event'] or 'reject' in r['event'] or 'mismatch' in r['event'] or 'lock' in r['event'] %}bad{% elif 'ok' in r['event'] or 'confirm' in r['event'] or 'approv' in r['event'] or 'success' in r['event'] %}good{% endif %}">{{ r['event'] | replace('_', ' ') }}</span></td>
           <td>{{ r['username'] or '-' }}</td><td>{{ r['ip'] }}</td><td>{{ r['detail'] }}</td></tr>
     {% endfor %}</tbody>
   </table>

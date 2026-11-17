@@ -13,15 +13,16 @@ denying popular cyber attacks.*
 
 ## Group members
 
-## Group members
-
 | # | Name | Index number | Area of responsibility |
-|---|------|--------------|------------------------|
-| 1 | ⁠⁠Boamah Jeffrey | 10374466 | **Authentication and MFA**: password policy, PBKDF2 hashing, account lockout, TOTP two-factor login, session handling (`app/authn.py`, `app/routes/auth.py`) |
-| 2 | Agbenu Caleb  | 10335038 | **Access control (IAM)**: role-based permissions, protection against viewing other students' records, grade maker-checker workflow, admin audit page (`app/routes/portal.py`, `staff.py`, `admin.py`) |
+|---|---|---|---|
+| 1 | Boamah Jeffrey | 10374466 | **Authentication and MFA**: password policy, PBKDF2 hashing, account lockout, TOTP two-factor login, session handling (`app/authn.py`, `app/routes/auth.py`) |
+| 2 | Agbenu Caleb | 10335038 | **Access control (IAM)**: role-based permissions, protection against viewing other students' records, grade maker-checker workflow, admin audit page (`app/routes/portal.py`, `staff.py`, `admin.py`) |
 | 3 | Yahya Mohammed Yakubu | 10322490 | **API security**: JWT tokens and revocation, HMAC-signed payment webhooks, replay protection (`app/routes/api.py`) |
-| 4 | ⁠⁠Michael Affum Dankwah | 19335041 | **Data protection and web attack defences**: field encryption, SQL injection prevention, XSS, CSRF, security headers, tamper-evident audit log (`app/db.py`, `app/security.py`, `app/templates/`) |
-| 5 | Jason Quaye | 10335048 | **Infrastructure and testing**: Nginx, firewall, fail2ban, Kerberos reference config, rate limiting, the 62 security tests and the live attack demo (`deploy/`, `tests/`, `scripts/attack_demo.py`) |
+| 4 | Michael Affum Dankwah | 19335041 | **Data protection and web attack defences**: field encryption, SQL injection prevention, XSS, CSRF, security headers, tamper-evident audit log (`app/db.py`, `app/security.py`, `app/templates/`) |
+| 5 | Jason Quaye | 10335048 | **Infrastructure and testing**: Nginx, firewall, fail2ban, Kerberos reference config, rate limiting, 62 tests, live attack demo (`deploy/`, `tests/`, `scripts/attack_demo.py`) |
+
+**GitHub repository:** https://github.com/JefferyBoamah/secure-student-portal
+**Hosting URL:** to be added by the group (the portal runs locally over HTTPS at https://127.0.0.1:5000 for the demonstration)
 
 ---
 
@@ -138,6 +139,7 @@ the page shows a secret key you can add to Google Authenticator / Microsoft Auth
 3. In the browser: log in as `ama`, open Results, then change the number in `/results/<id>` to another student's ID and show the 404.
 4. Log in as `lecturer1`, propose a grade for `kofi`; show it is hidden from `kofi`; approve it as `registry1`; show it appears.
 5. Log in as `admin1` and open **Audit log**: show the hash-chain verification and all the security events from the demo.
+6. Pay a fee as `ama` (amount in the form is in GHS), then play the payment provider: `python3 scripts/confirm_payment.py PAY-REFERENCE 400000` (amount in pesewas, GHS x 100). The payment turns **paid**; run it again to show replay protection.
 
 > Run `attack_demo.py` only against your own local copy.
 
@@ -186,9 +188,9 @@ secure-student-portal/
 │   ├── db.py                 SQLite schema and parameterised helpers
 │   ├── seed.py               demo accounts and data
 │   ├── routes/               auth, portal, staff, admin, api
-│   ├── templates/            HTML (auto-escaped, no inline scripts)
-│   └── static/style.css
-├── scripts/                  seed.py, totp.py, make_cert.py, attack_demo.py
+│   ├── templates/            HTML (auto-escaped, no inline scripts or styles)
+│   └── static/               style.css and app.js (served from our own origin; the CSP forbids anything else)
+├── scripts/                  seed.py, totp.py, make_cert.py, attack_demo.py, confirm_payment.py
 ├── tests/                    62 security tests (pytest)
 └── deploy/                   nginx.conf, firewall.sh, fail2ban/, kerberos/
 ```

@@ -7,11 +7,11 @@
   <p class="hint">Grades stay hidden from students until the registry approves them (maker-checker).</p>
   <form method="post" class="row">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <label>Student
+    <label><span>Student</span>
       <select name="student_id" required>{% for s in students %}<option value="{{ s['id'] }}">{{ s['username'] }} ({{ s['full_name'] }})</option>{% endfor %}</select></label>
-    <label>Course
+    <label><span>Course</span>
       <select name="course_id" required>{% for c in courses %}<option value="{{ c['id'] }}">{{ c['code'] }}</option>{% endfor %}</select></label>
-    <label>Score (0-100) <input name="score" type="number" min="0" max="100" required></label>
+    <label><span>Score (0-100)</span><input name="score" type="number" min="0" max="100" required></label>
     <button type="submit">Submit for approval</button>
   </form>
 </section>
@@ -22,7 +22,7 @@
     <thead><tr><th>Student</th><th>Course</th><th>Score</th><th>Grade</th><th>Status</th><th>Entered by</th><th>Approved by</th><th></th></tr></thead>
     <tbody>{% for r in rows %}
       <tr><td>{{ r['username'] }}</td><td>{{ r['code'] }}</td><td>{{ r['score'] }}</td><td>{{ r['grade'] }}</td>
-          <td>{{ r['status'] }}</td><td>{{ r['entered_by'] }}</td><td>{{ r['approved_by'] or '-' }}</td>
+          <td><span class="badge {{ r['status'] }}">{{ r['status'] }}</span></td><td>{{ r['entered_by'] }}</td><td>{{ r['approved_by'] or '-' }}</td>
           <td>{% if r['status'] == 'pending' and can('grades:approve') %}
             <form method="post" action="{{ url_for('staff.approve', result_id=r['id']) }}" class="inline">
               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

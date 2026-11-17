@@ -5,10 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Student Portal{% endblock %} | Secure Student Portal</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
 </head>
 <body>
+{% include "_icons.html" %}
 <header class="top">
-  <a class="brand" href="{{ url_for('portal.dashboard') }}">Secure Student Portal</a>
+  <a class="brand" href="{{ url_for('portal.dashboard') }}"><svg><use href="#i-logo"/></svg>Secure Student Portal</a>
   <nav>
     {% if user %}
       {% if can('results:read_own') %}<a href="{{ url_for('portal.results') }}">Results</a>{% endif %}

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Sign in{% endblock %} | Secure Student Portal</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body class="auth">
+{% include "_icons.html" %}
+<div class="auth-shell">
+  <aside class="auth-brand">
+    <div class="brand-mark"><svg><use href="#i-logo"/></svg><span>Secure Student Portal</span></div>
+    <div>
+      <h2>Your results and fees, protected at every layer.</h2>
+      <p class="tagline">A student portal designed security-first: strong sign-in, locked-down records and a tamper-evident audit trail.</p>
+      <ul class="feature-list">
+        <li><span class="ic"><svg><use href="#i-phone"/></svg></span><div><b>Two-factor sign-in</b>A one-time code from your authenticator app on every login.</div></li>
+        <li><span class="ic"><svg><use href="#i-lock"/></svg></span><div><b>Encrypted data</b>Passwords are hashed and sensitive fields encrypted in the database.</div></li>
+        <li><span class="ic"><svg><use href="#i-log"/></svg></span><div><b>Audited actions</b>Every security event goes into a tamper-evident log.</div></li>
+      </ul>
+    </div>
+    <p class="brand-foot">Information Security &middot; Level 300 group project</p>
+  </aside>
+  <section class="auth-panel">
+    <div class="auth-card">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}<p class="flash {{ category }}">{{ message }}</p>{% endfor %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+      <p class="secure-note"><svg><use href="#i-lock"/></svg>Encrypted connection &middot; HTTPS only</p>
+    </div>
+  </section>
+</div>
+</body>
+</html>

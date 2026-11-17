@@ -8,7 +8,7 @@
     <thead><tr><th>Course</th><th>Title</th><th>Score</th><th>Grade</th><th></th></tr></thead>
     <tbody>
     {% for r in rows %}
-      <tr><td>{{ r['code'] }}</td><td>{{ r['title'] }}</td><td>{{ r['score'] }}</td><td>{{ r['grade'] }}</td>
+      <tr><td>{{ r['code'] }}</td><td>{{ r['title'] }}</td><td>{{ r['score'] }}</td><td><span class="badge good">{{ r['grade'] }}</span></td>
           <td><a href="{{ url_for('portal.result_detail', result_id=r['id']) }}">Details</a></td></tr>
     {% endfor %}
     </tbody>

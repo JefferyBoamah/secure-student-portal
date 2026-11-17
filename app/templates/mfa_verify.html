@@ -1,12 +1,14 @@
-{% extends "base.html" %}
+{% extends "auth_base.html" %}
 {% block title %}Verify code{% endblock %}
 {% block content %}
-<section class="card narrow">
-  <h1>Enter your code</h1>
-  <form method="post" autocomplete="off">
-    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-    <label>6-digit code <input name="code" required inputmode="numeric" pattern="[0-9 ]{6,7}" maxlength="7" autofocus></label>
-    <button type="submit">Verify</button>
-  </form>
-</section>
+<div class="steps" aria-hidden="true"><span class="on"></span><span class="on"></span></div>
+<h1>Enter your code</h1>
+<p class="lead">Step 2 of 2: open your authenticator app and type the 6-digit code shown for this portal.</p>
+<form method="post" autocomplete="off">
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <label><span>6-digit code</span><input class="code-input" name="code" required inputmode="numeric" pattern="[0-9 ]{6,7}" maxlength="7" autofocus placeholder="000000"></label>
+  <button type="submit" class="block">Verify and sign in</button>
+</form>
+<p class="hint">Codes change every 30 seconds and can only be used once.</p>
+<p class="auth-alt"><a href="{{ url_for('auth.login') }}">Back to sign in</a></p>
 {% endblock %}
