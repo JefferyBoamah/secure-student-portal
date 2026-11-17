@@ -17,7 +17,7 @@ denying popular cyber attacks.*
 |---|---|---|---|
 | 1 | Boamah Jeffrey | 10374466 | **Authentication and MFA**: password policy, PBKDF2 hashing, account lockout, TOTP two-factor login, session handling (`app/authn.py`, `app/routes/auth.py`) |
 | 2 | Agbenu Caleb | 10335038 | **Access control (IAM)**: role-based permissions, protection against viewing other students' records, grade maker-checker workflow, admin audit page (`app/routes/portal.py`, `staff.py`, `admin.py`) |
-| 3 | Yahya Mohammed Yakubu | 10322490 | **API security**: JWT tokens and revocation, HMAC-signed payment webhooks, replay protection (`app/routes/api.py`) |
+| 3 | Yahya Mohammed Yakubu | 10322590 | **API security**: JWT tokens and revocation, HMAC-signed payment webhooks, replay protection (`app/routes/api.py`) |
 | 4 | Michael Affum Dankwah | 10335041 | **Data protection and web attack defences**: field encryption, SQL injection prevention, XSS, CSRF, security headers, tamper-evident audit log (`app/db.py`, `app/security.py`, `app/templates/`) |
 | 5 | Jason Quaye | 10335048 | **Infrastructure and testing**: Nginx, firewall, fail2ban, Kerberos reference config, rate limiting, 62 tests, live attack demo (`deploy/`, `tests/`, `scripts/attack_demo.py`) |
 
