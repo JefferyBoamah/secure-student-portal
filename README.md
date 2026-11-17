@@ -22,7 +22,7 @@ denying popular cyber attacks.*
 | 5 | Jason Quaye | 10335048 | **Infrastructure and testing**: Nginx, firewall, fail2ban, Kerberos reference config, rate limiting, 62 tests, live attack demo (`deploy/`, `tests/`, `scripts/attack_demo.py`) |
 
 **GitHub repository:** https://github.com/JefferyBoamah/secure-student-portal
-**Hosting URL:** to be added by the group (the portal runs locally over HTTPS at https://127.0.0.1:5000 for the demonstration)
+**Hosting URL:** https://mrstacksss.pythonanywhere.com (the portal runs locally over HTTPS at https://127.0.0.1:5000 for the demonstration)
 
 ---
 
